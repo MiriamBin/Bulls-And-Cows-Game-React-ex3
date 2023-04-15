@@ -6,7 +6,7 @@ function GuessTable(guesses) {
     const  createRow = (guess) => {
         // const number = guess.allGuesses.join(" ");
         return (
-            <tr>
+            <tr key = {guesses.allGuesses.length}>
                 <td>{""}</td>
                 <td>{guess.cows}</td>
                 <td>{guess.bulls}</td>

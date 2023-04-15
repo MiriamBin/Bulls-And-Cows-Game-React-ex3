@@ -1,9 +1,14 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
-import React from "react";
+import React, {useState} from "react";
 import NumberInput from "./NumberInput";
 import {forEach} from "react-bootstrap/ElementChildren";
+import Messages from "./Messages";
+import GuessTable from "./GuessTable";
 
 function Guess(guess){
+
+    const [guessesArr, setGuessesArr] = useState([]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!checkInput() || !checkUniqueNumbers()) {
@@ -21,8 +26,7 @@ function Guess(guess){
     }
 
     const checkInput = () => {
-        let numbers = guess.numbers;
-        if (numbers.some(num => num === "")) {
+        if (guess.numbers.some(num => num === "")) {
             guess.setMessage("Please enter 4 numbers");
             return false;
         }
@@ -43,9 +47,9 @@ function Guess(guess){
             }
         }
         guess.setMessage(`Your guess: ${bulls} bulls and ${cows} cows`);
-        guess.allGuesses.push({guess: guess.numbers, bulls: bulls, cows: cows});
+        setGuessesArr(guessesArr => [...guessesArr, {guess: guess.numbers, bulls: bulls, cows: cows}])
+        console.log("guessesArr in countBullsCows", guessesArr);
     }
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -70,6 +74,10 @@ function Guess(guess){
                         <Button type="submit">GO!</Button>
                     </Col>
                 </Row>
+                <br/>
+                <Messages message = {guess.message} />
+                <br/>
+                <GuessTable allGuesses = {guessesArr}/>
             </Container>
         </form>
     );

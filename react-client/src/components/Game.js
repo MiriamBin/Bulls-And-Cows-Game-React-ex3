@@ -18,15 +18,13 @@ function generateRandomNumbers() {
 }
 
     let target = generateRandomNumbers();
-    let guessesArr = [];
-    console.log("target",target);
-function Game(){
+    console.log("target", target);
 
+function Game(){
     const [guess, setGuess] = useState(["", "", "", ""]);
     const [message, setMessage] = useState("");
     const [bulls, setBulls] = useState(0);
     const [cows, setCows] = useState(0);
-
 
     return (
         <Card style={{ backgroundColor: '#fdfef4', maxWidth: '75%', margin: 'auto' }}>
@@ -35,13 +33,9 @@ function Game(){
                 <Container  >
                     <Menu />
                     <br/>
-                    <Guess allGuesses = {guessesArr} numbers={guess} setNumbers={setGuess}
+                    <Guess numbers={guess} setNumbers={setGuess}
                            message = {message} setMessage = {setMessage} target = {target}
                            cows = {cows} setCows = {setCows} bulls = {bulls} setBulls = {setBulls}/>
-                    <br/>
-                    <Messages message = {message} />
-                    <br/>
-                    <GuessTable allGuesses = {guessesArr}/>
                 </Container>
             </Card.Body>
         </Card>
