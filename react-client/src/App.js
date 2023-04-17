@@ -7,7 +7,7 @@ function App() {
     const backgroundStyle = {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'repeat',
         display: 'flex',
         height: '100vh',
         backgroundPosition: 'center',

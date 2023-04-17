@@ -1,25 +1,21 @@
 import {Table} from "react-bootstrap";
+import {useState} from "react";
+import {forEach} from "react-bootstrap/ElementChildren";
 
-function GuessTable(guesses) {
-    let rows = [];
+function GuessTable(guess) {
+   let tableRows = [];
+    //const [tableRows, settableRows] = useState([]);
 
     const  createRow = (guess) => {
-        // const number = guess.allGuesses.join(" ");
-        return (
-            <tr key = {guesses.allGuesses.length}>
-                <td>{""}</td>
-                <td>{guess.cows}</td>
-                <td>{guess.bulls}</td>
-            </tr>
-        );
+        let number = guess.guess.join(" ");
+        tableRows.push(<tr key={tableRows.length}>
+            <td>{number}</td>
+            <td>{guess.cows}</td>
+            <td>{guess.bulls}</td>
+        </tr>);
     }
 
-    guesses.allGuesses.forEach((guess) => {
-        console.log("forEach GuessTable ")
-        rows.push(createRow(guess));
-    });
-
-    console.log("guesses in GuessTable", guesses.allGuesses);
+    guess.guessesArr.forEach(createRow);
 
     return (
         <Table>
@@ -30,7 +26,7 @@ function GuessTable(guesses) {
                 <th>Cows</th>
             </tr>
             </thead>
-            <tbody>{rows}</tbody>
+            <tbody>{tableRows}</tbody>
         </Table>
     );
 }

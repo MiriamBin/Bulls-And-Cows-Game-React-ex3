@@ -47,8 +47,7 @@ function Guess(guess){
             }
         }
         guess.setMessage(`Your guess: ${bulls} bulls and ${cows} cows`);
-        setGuessesArr(guessesArr => [...guessesArr, {guess: guess.numbers, bulls: bulls, cows: cows}])
-        console.log("guessesArr in countBullsCows", guessesArr);
+        setGuessesArr( [...guessesArr, {guess: guess.numbers, bulls: bulls, cows: cows}]);
     }
 
     return (
@@ -71,13 +70,13 @@ function Guess(guess){
                 <br/>
                 <Row className="justify-content-center">
                     <Col>
-                        <Button type="submit">GO!</Button>
+                        <Button type="submit">MOO!</Button>
                     </Col>
                 </Row>
                 <br/>
                 <Messages message = {guess.message} />
                 <br/>
-                <GuessTable allGuesses = {guessesArr}/>
+                <GuessTable guessesArr = {guessesArr}/>
             </Container>
         </form>
     );
