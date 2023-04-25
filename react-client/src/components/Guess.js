@@ -7,6 +7,8 @@ import GuessTable from "./GuessTable";
 
 function Guess(guess){
 
+
+
     const [guessesArr, setGuessesArr] = useState([]);
 
     const handleSubmit = (e) => {
@@ -39,6 +41,7 @@ function Guess(guess){
     const countBullsCows = (targetArr, guessArr) => {
         let bulls = 0;
         let cows = 0;
+
         for (let i = 0; i < targetArr.length; i++) {
             if (targetArr[i] === guessArr[i]) {
                 guess.setBulls(bulls++);
@@ -46,6 +49,13 @@ function Guess(guess){
                 guess.setCows(cows++);
             }
         }
+
+        if (bulls === 4) {  // if all 4 numbers are correct
+            guess.setMessage("You won!");
+            guess.setGameOver(true);
+            return
+        }
+
         guess.setMessage(`Your guess: ${bulls} bulls and ${cows} cows`);
         setGuessesArr( [...guessesArr, {guess: guess.numbers, bulls: bulls, cows: cows}]);
     }

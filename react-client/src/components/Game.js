@@ -1,6 +1,6 @@
-import {Container} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
-import {useState} from "react";
+import React, {useState} from "react";
 import Guess from "./Guess";
 import Menu from "./Menu";
 import Messages from "./Messages";
@@ -21,24 +21,38 @@ function generateRandomNumbers() {
     console.log("target", target);
 
 function Game(){
-    const [guess, setGuess] = useState(["", "", "", ""]);
     const [message, setMessage] = useState("");
+
+    const [guess, setGuess] = useState(["", "", "", ""]);
     const [bulls, setBulls] = useState(0);
     const [cows, setCows] = useState(0);
 
+
+    const [gameOver, setGameOver] = useState(false);
+
+    if (gameOver) {
+        return ( <>
+                        <Messages message={message}/>
+                        <Button variant="outline-primary" onClick={() => setGameOver(false) & setMessage("")}>New Game </Button>
+                </>
+        );
+    }
+
     return (
-        <Card style={{ backgroundColor: '#fdfef4', maxWidth: '75%', margin: 'auto' }}>
-            <Card.Img variant="top" src="/logo.png" />
-            <Card.Body style={{ display: 'flex', alignItems: 'center' }}>
-                <Container  >
-                    <Menu />
-                    <br/>
-                    <Guess numbers={guess} setNumbers={setGuess}
-                           message = {message} setMessage = {setMessage} target = {target}
-                           cows = {cows} setCows = {setCows} bulls = {bulls} setBulls = {setBulls}/>
-                </Container>
-            </Card.Body>
-        </Card>
+                <Guess numbers={guess}
+                       setNumbers={setGuess}
+                       message = {message}
+                       setMessage = {setMessage}
+                       target = {target}
+                       cows = {cows}
+                       setCows = {setCows}
+                       bulls = {bulls}
+                       setBulls = {setBulls}
+
+                       gameOver = {gameOver}
+                       setGameOver = {setGameOver}/>
     );
 }
 export default Game;
+
+
