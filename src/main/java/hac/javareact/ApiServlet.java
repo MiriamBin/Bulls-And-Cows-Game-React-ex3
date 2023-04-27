@@ -1,6 +1,10 @@
 package hac.javareact;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -38,12 +42,22 @@ public class ApiServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        String path = getServletContext().getRealPath(".");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        String name = request.getParameter("name");
+        Integer score = Integer.parseInt(request.getParameter("score"));
+        System.out.println(name);
+        System.out.println(score);
+
+       // add to file FileManagement.addToFile(name, score, path);
+
         // your code here
 
         // note: this is necessary to allow cross-origin requests from the React frontend
-        // response.setHeader("Access-Control-Allow-Origin", "*");
-
     }
 
     @Override

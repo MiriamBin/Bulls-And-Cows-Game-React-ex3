@@ -1,6 +1,4 @@
 import {Table} from "react-bootstrap";
-import {useState} from "react";
-import {forEach} from "react-bootstrap/ElementChildren";
 
 function GuessTable(guess) {
    let tableRows = [];

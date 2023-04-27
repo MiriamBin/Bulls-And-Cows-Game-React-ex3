@@ -2,8 +2,8 @@ import {Alert} from "react-bootstrap";
 
 function Messages(message){
     return(
-        <Alert key={'info'} variant={'info'} show={message.message !== ""}>
-            <p>{message.message}</p>
+        <Alert className="m-3 text-center" key={'info'} variant={'info'} show={message.message !== ""}>
+            {message.message}
         </Alert>
     )
 }

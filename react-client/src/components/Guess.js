@@ -1,7 +1,6 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 import React, {useState} from "react";
 import NumberInput from "./NumberInput";
-import {forEach} from "react-bootstrap/ElementChildren";
 import Messages from "./Messages";
 import GuessTable from "./GuessTable";
 
@@ -51,7 +50,6 @@ function Guess(guess){
         }
 
         if (bulls === 4) {  // if all 4 numbers are correct
-            guess.setMessage("You won!");
             guess.setGameOver(true);
             return
         }
@@ -63,7 +61,7 @@ function Guess(guess){
     return (
         <form onSubmit={handleSubmit}>
             <Container>
-                <Row>
+                <Row className="m-3">
                     <Col>
                         <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {0}/>
                     </Col>
@@ -77,15 +75,12 @@ function Guess(guess){
                         <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {3}/>
                     </Col>
                 </Row>
-                <br/>
-                <Row className="justify-content-center">
+                <Row className="justify-content-center m-3">
                     <Col>
                         <Button type="submit">MOO!</Button>
                     </Col>
                 </Row>
-                <br/>
                 <Messages message = {guess.message} />
-                <br/>
                 <GuessTable guessesArr = {guessesArr}/>
             </Container>
         </form>
