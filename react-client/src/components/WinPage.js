@@ -11,7 +11,12 @@ function WinPage() {
 
     function handleJson(data) {
         // Handle the parsed JSON data received from the server
+
+        //TODO: do something with the data
         console.log('Server Response:', data);
+
+
+
     }
 
     function handleError(error) {
@@ -22,7 +27,7 @@ function WinPage() {
         event.preventDefault();
         const name = event.target.elements.name.value.trim();
         let params = {
-            score: 3, //TODO: change the score
+            score: 1, //TODO: change the score
             name: name
         };
         fetch("/java_react_war/api/highscores",{

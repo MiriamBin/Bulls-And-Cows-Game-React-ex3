@@ -1,9 +1,9 @@
 package hac.javareact;
 import java.io.Serializable;
 
-class UserScore implements Serializable, Comparable<UserScore> {
+class UserScore implements Serializable, Comparable<UserScore>{
     private final String name;
-    private final int score;
+    private int score;
 
     public UserScore(String name, int score) {
         this.name = name;
@@ -17,6 +17,8 @@ class UserScore implements Serializable, Comparable<UserScore> {
     public int getScore() {
         return score;
     }
+
+    public void setScore(int score) { this.score = score; }
 
     @Override
     public int compareTo(UserScore other) {
