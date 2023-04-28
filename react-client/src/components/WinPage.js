@@ -9,7 +9,7 @@ function WinPage() {
     }
 
     function handleJson(jsonObj) {
-        console.log("handleJson"); //TODO: do something with the json
+        console.log(jsonObj); //TODO: do something with the json
     }
 
     function handleError(error) {
