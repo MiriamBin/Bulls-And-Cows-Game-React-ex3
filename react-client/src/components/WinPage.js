@@ -3,13 +3,15 @@ import {Alert, Col, Form, Row} from "react-bootstrap";
 function WinPage() {
     function handleResponse(response) {
         if (!response.ok) {
-            throw new Error(`Some error occured : ${response.status} ${response.statusText}`);
+            throw new Error("HTTP error, status = " + response.status);
         }
-        console.log("handleResponse OK!");
+        //console.log(response);
+        return response.json(); // Parse the JSON response
     }
 
-    function handleJson(jsonObj) {
-        console.log(jsonObj); //TODO: do something with the json
+    function handleJson(data) {
+        // Handle the parsed JSON data received from the server
+        console.log('Server Response:', data);
     }
 
     function handleError(error) {

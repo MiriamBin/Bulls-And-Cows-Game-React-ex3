@@ -26,16 +26,16 @@ public class ApiServlet extends HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         //String path = getServletContext().getRealPath(".");
         try {
-            List<UserScore> topScores = fileManager.getTopScores();
-            // Limit the list to the top 5 scores
-            List<UserScore> top5Scores = topScores.subList(0, Math.min(topScores.size(), 5));
-            System.out.println("top5Scores" + top5Scores.get(0).getName());
-            // Serialize the top 5 scores to JSON using Gson
-            Gson gson = new Gson();
-            String json = gson.toJson(top5Scores);
-
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write(json);
+//            List<UserScore> topScores = fileManager.getTopScores();
+//            // Limit the list to the top 5 scores
+//            List<UserScore> top5Scores = topScores.subList(0, Math.min(topScores.size(), 5));
+//            System.out.println("top5Scores" + top5Scores.get(0).getName());
+//            // Serialize the top 5 scores to JSON using Gson
+//            Gson gson = new Gson();
+//            String json = gson.toJson(top5Scores);
+//
+//            response.setStatus(HttpServletResponse.SC_OK);
+//            response.getWriter().write(json);
         } catch (Exception e) {
             System.out.println(e.getMessage() + "43");
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -51,21 +51,28 @@ public class ApiServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/plain");
+        response.setContentType("application/json");
         String path = getServletContext().getRealPath(".");
         System.out.println(path);
         response.setHeader("Access-Control-Allow-Origin", "*");
 
-        String name = request.getParameter("name");
-        int score = Integer.parseInt(request.getParameter("score"));
-        System.out.println(name);
-        System.out.println(score);
-
         try {
+            String name = request.getParameter("name");
+            int score = Integer.parseInt(request.getParameter("score"));
+
             fileManager.addScore(name, score);
+
+            List<UserScore> topScores = fileManager.getTopScores();
+            // Limit the list to the top 5 scores
+            List<UserScore> top5Scores = topScores.subList(0, Math.min(topScores.size(), 5));
+            // Serialize the top 5 scores to JSON using Gson
+            Gson gson = new Gson();
+            String json = gson.toJson(topScores);
+
+            System.out.println(top5Scores); //TODO: remove
+
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write("AAA");
-            //doGet(request, response);
+            response.getWriter().write(json);
         } catch (Exception e) {
             System.out.println(e.getMessage() + "69");
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
