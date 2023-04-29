@@ -6,10 +6,10 @@ function GuessTable(guess) {
 
     const  createRow = (guess) => {
         let number = guess.guess.join(" ");
-        tableRows.push(<tr key={tableRows.length}>
+        tableRows.unshift(<tr key={tableRows.length}>
             <td>{number}</td>
-            <td>{guess.cows}</td>
             <td>{guess.bulls}</td>
+            <td>{guess.cows}</td>
         </tr>);
     }
 

@@ -1,8 +1,14 @@
 import {Alert, Col, Form, Row} from "react-bootstrap";
+import {useState} from "react";
+import Messages from "./Messages";
 
 function WinPage() {
+
+    const [errorMessage, setErrorMessage] = useState("");
+
     function handleResponse(response) {
         if (!response.ok) {
+            setErrorMessage("MOO! Something went wrong. Please try again later.");
             throw new Error("HTTP error, status = " + response.status);
         }
         //console.log(response);
@@ -20,27 +26,41 @@ function WinPage() {
         return <Alert className=" danger m-3 text-center"> {error.toString()}</Alert> //TODO: use this somewhere and maybe change the message
     }
 
-    function handleFormSubmissionPost(event) {
-        event.preventDefault();
-        const name = event.target.elements.name.value.trim();
-        let params = {
-            score: 1, //TODO: change the score
-            name: name
-        };
-        fetch("/java_react_war/api/highscores",{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'datatype': 'json'
-            },
-            body: new URLSearchParams(params).toString()
-        })
-            .then(handleResponse)
-            .then(handleJson)
-            .catch(handleError);
+    function validateName(userName){
+        const regex = /^[A-Z a-z]+$/; // regex to match only letters (upper or lower case)
+        if(!regex.test(userName)){
+            setErrorMessage("Name must contain only letters");
+            console.log("error");
+            return false;
+        }
+        return true;
     }
 
-  return (
+    function handleFormSubmissionPost(event) {
+        setErrorMessage("");
+        event.preventDefault();
+        const name = event.target.elements.name.value.trim();
+
+        if (validateName(name)) {
+            let params = {
+                score: 1, //TODO: change the score
+                name: name
+            };
+            fetch("/java_react_war/api/highscores", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'datatype': 'json'
+                },
+                body: new URLSearchParams(params).toString()
+            })
+                .then(handleResponse)
+                .then(handleJson)
+                .catch(handleError);
+        }
+    }
+
+    return (
     <>
         <Row>
             <Alert className="m-3 text-center">You Win!</Alert>
@@ -51,6 +71,9 @@ function WinPage() {
                     <Form.Control type="text" placeholder={"Enter your name"} name="name" />
                 </Col>
             </Row>
+            <Col className="row-justify-content-md-center row-cols-xs-lg-6">
+                <Messages message={errorMessage} type={"danger"}/>
+            </Col>
             <Row className="justify-content-md-center">
                 <Col xs lg="1">
                     <button type="submit" className="btn btn-primary m-3">Send</button>
