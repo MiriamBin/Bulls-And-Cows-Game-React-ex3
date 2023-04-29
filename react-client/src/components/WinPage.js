@@ -1,10 +1,13 @@
 import {Alert, Col, Form, Row} from "react-bootstrap";
 import {useState} from "react";
 import Messages from "./Messages";
+import HighScoreTable from "./HighScoreTable";
 
-function WinPage() {
+function WinPage({score}) {
 
     const [errorMessage, setErrorMessage] = useState("");
+    const [scores, setScores] = useState([]);
+    const [showHighScores, setShowHighScores] = useState(false);
 
     function handleResponse(response) {
         if (!response.ok) {
@@ -17,7 +20,8 @@ function WinPage() {
 
     function handleJson(data) {
         // Handle the parsed JSON data received from the server
-
+        setScores(data);
+        setShowHighScores(true);
         //TODO: do something with the data
         console.log('Server Response:', data);
     }
@@ -43,7 +47,7 @@ function WinPage() {
 
         if (validateName(name)) {
             let params = {
-                score: 1, //TODO: change the score
+                score: score, //TODO: change the score
                 name: name
             };
             fetch("/java_react_war/api/highscores", {
@@ -63,23 +67,30 @@ function WinPage() {
     return (
     <>
         <Row>
-            <Alert className="m-3 text-center">You Win!</Alert>
+            <Alert className="m-3 text-center">You Win! your score is {score}</Alert>
         </Row>
-        <Form className="border p-3" onSubmit={handleFormSubmissionPost}>
-            <Row className="justify-content-md-center">
-                <Col xs lg="6">
-                    <Form.Control type="text" placeholder={"Enter your name"} name="name" />
-                </Col>
-            </Row>
-            <Col className="row-justify-content-md-center row-cols-xs-lg-6">
-                <Messages message={errorMessage} type={"danger"}/>
+
+        <Row className="justify-content-md-center">
+            <Col xs lg="10">
+                {showHighScores ? <HighScoreTable scores={scores}/> :
+                    <Form className="border p-3" onSubmit={handleFormSubmissionPost}>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="6">
+                            <Form.Control type="text" placeholder={"Enter your name"} name="name" />
+                        </Col>
+                    </Row>
+                    <Col className="row-justify-content-md-center row-cols-xs-lg-6">
+                        <Messages message={errorMessage} type={"danger"}/>
+                    </Col>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="1">
+                            <button type="submit" className="btn btn-primary m-3">Send</button>
+                        </Col>
+                    </Row>
+                </Form>}
             </Col>
-            <Row className="justify-content-md-center">
-                <Col xs lg="1">
-                    <button type="submit" className="btn btn-primary m-3">Send</button>
-                </Col>
-            </Row>
-        </Form>
+
+        </Row>
     </>
   )
 }

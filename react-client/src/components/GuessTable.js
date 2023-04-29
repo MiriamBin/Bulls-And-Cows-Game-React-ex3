@@ -12,7 +12,6 @@ function GuessTable(guess) {
             <td>{guess.cows}</td>
         </tr>);
     }
-
     guess.guessesArr.forEach(createRow);
 
     return (

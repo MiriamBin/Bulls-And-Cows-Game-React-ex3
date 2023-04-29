@@ -3,17 +3,22 @@ import {Table} from "react-bootstrap";
 function HighScoreTable(scoreData){
     let tableRows = [];
 
-    const  createRow = (scoreData) => { //TODO: maybe we dont need it, depends on how we will get the data
-        tableRows.push(<tr key={tableRows.length}>
-            <td>{scoreData.score}</td>
-            <td>{scoreData.name}</td>
-        </tr>);
+    const createRow = (score, index) => {
+        tableRows.push(
+            <tr className="text-center" key={tableRows.length}>
+                <td>{index + 1}</td>
+                <td>{score.name}</td>
+                <td>{score.score}</td>
+            </tr >
+        );
     }
+    scoreData.scores.forEach(createRow);
 
     return(
-        <Table>
+        <Table striped bordered hover>
             <thead>
-            <tr>
+            <tr className="text-center">
+                <th>Place</th>
                 <th>Username</th>
                 <th>Score</th>
             </tr>

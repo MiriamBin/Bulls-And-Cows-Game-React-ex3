@@ -9,6 +9,7 @@ import Messages from "./Messages";
 function Controller() {
 
     const [gameOver, setGameOver] = useState(false);
+    const [score, setScore] = useState(0);
 
     return (
         <Card style={{ backgroundColor: '#fdfef4', maxWidth: '75%', margin: 'auto'}}>
@@ -19,7 +20,7 @@ function Controller() {
                         <Menu/>
                     </Row>
                     <Row>
-                        {!gameOver ? <WinPage/> : <Game gameOver={gameOver} setGameOver={setGameOver}/>}
+                        {gameOver ? <WinPage score = {score}/> : <Game setScore={setScore} setGameOver={setGameOver}/>}
                     </Row>
                 </Container>
             </Card.Body>

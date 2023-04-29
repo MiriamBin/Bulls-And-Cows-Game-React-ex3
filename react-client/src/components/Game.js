@@ -16,7 +16,7 @@ function generateRandomNumbers() {
     let target = generateRandomNumbers();
     console.log("target", target);
 
-function Game({gameOver, setGameOver}){
+function Game({setScore, setGameOver}){
     const [message, setMessage] = useState("");
 
     const [guess, setGuess] = useState(["", "", "", ""]);
@@ -33,8 +33,9 @@ function Game({gameOver, setGameOver}){
                    setCows = {setCows}
                    bulls = {bulls}
                    setBulls = {setBulls}
-                   gameOver = {gameOver}
-                   setGameOver = {setGameOver}/>
+                   setGameOver = {setGameOver}
+                   setScore = {setScore}
+            />
     );
 }
 export default Game;

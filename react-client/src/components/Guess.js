@@ -6,8 +6,6 @@ import GuessTable from "./GuessTable";
 
 function Guess(guess){
 
-
-
     const [guessesArr, setGuessesArr] = useState([]);
 
     const handleSubmit = (e) => {
@@ -51,6 +49,7 @@ function Guess(guess){
 
         if (bulls === 4) {  // if all 4 numbers are correct
             guess.setGameOver(true);
+            guess.setScore(guessesArr.length + 1);
             return
         }
 
