@@ -2,7 +2,7 @@ import {Table} from "react-bootstrap";
 
 function GuessTable(guess) {
    let tableRows = [];
-    //const [tableRows, settableRows] = useState([]);
+    //const [tableRows, settableRows] = useState([]); // TODO:
 
     const  createRow = (guess) => {
         let number = guess.guess.join(" ");

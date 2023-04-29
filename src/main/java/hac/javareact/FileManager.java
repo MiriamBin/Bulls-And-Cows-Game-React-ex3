@@ -61,6 +61,18 @@ public class FileManager {
     public synchronized void addScore(String name, int score) throws IOException, ClassNotFoundException {
 
         List<UserScore> scoreList = getTopScores();
+        UserScore newUserScore =  new UserScore(name, score);
+
+        int index = scoreList.indexOf(newUserScore);
+        if(index != -1) {
+            UserScore userScoreToUpdate = scoreList.get(index);
+            if (userScoreToUpdate.getScore() > score)
+                userScoreToUpdate.setScore(score);
+
+        } else {
+            scoreList.add(newUserScore);
+        }
+
 
         // TODO: is not working
 //        Optional<UserScore> existingScore = scoreList.stream()
@@ -77,8 +89,8 @@ public class FileManager {
 //            scoreList.add(new UserScore(name, score));
 //        }
 
-        scoreList.removeIf(entry -> entry.getName().equals(name) && entry.getScore() >= score);
-        scoreList.add(new UserScore(name, score));
+//        scoreList.removeIf(entry -> entry.getName().equals(name) && entry.getScore() >= score);
+//        scoreList.add(new UserScore(name, score));
 
         try (FileOutputStream fos = new FileOutputStream(FILE_NAME);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {

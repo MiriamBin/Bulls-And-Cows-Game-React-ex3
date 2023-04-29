@@ -24,4 +24,18 @@ class UserScore implements Serializable, Comparable<UserScore>{
     public int compareTo(UserScore other) {
         return Integer.compare(this.score, other.score);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UserScore)) {
+            return false;
+        }
+
+        UserScore otherScore = (UserScore) other;
+        return this.name.equals(otherScore.name);
+    }
 }

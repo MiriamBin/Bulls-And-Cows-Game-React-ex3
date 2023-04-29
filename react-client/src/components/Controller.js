@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Game from "./Game";
 import Menu from "./Menu";
 import WinPage from "./WinPage";
+import Messages from "./Messages";
 
 function Controller() {
 
