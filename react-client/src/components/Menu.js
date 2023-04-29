@@ -16,10 +16,10 @@ function Menu(){
         <Container>
             <Row className="justify-content-center">
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick={() => newGame}>New Game </Button>
+                    <Button variant="outline-primary" onClick = {newGame}>New Game </Button>
                 </Col>
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick={() => showRules}>Game Rules </Button>
+                    <Button variant="outline-primary" onClick = {showRules}>Game Rules </Button>
                 </Col>
             </Row>
         </Container>

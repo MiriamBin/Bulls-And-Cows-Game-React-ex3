@@ -14,9 +14,6 @@ function WinPage() {
 
         //TODO: do something with the data
         console.log('Server Response:', data);
-
-
-
     }
 
     function handleError(error) {

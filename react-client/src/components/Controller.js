@@ -18,7 +18,7 @@ function Controller() {
                         <Menu/>
                     </Row>
                     <Row>
-                        {!gameOver ? <WinPage/> : <Game gameOver={gameOver} setGameOver={setGameOver}/> }
+                        {!gameOver ? <WinPage/> : <Game gameOver={gameOver} setGameOver={setGameOver}/>}
                     </Row>
                 </Container>
             </Card.Body>
