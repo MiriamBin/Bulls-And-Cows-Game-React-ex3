@@ -1,4 +1,5 @@
-import { Form } from 'react-bootstrap';
+import React from "react";
+import {Form} from "react-bootstrap";
 
 function NumberInput(input) {
     const handleChange = (index, e) => {
@@ -29,3 +30,29 @@ function NumberInput(input) {
 }
 
 export default NumberInput;
+
+// import React from "react";
+// import {Form} from "react-bootstrap";
+
+// function NumberInput({numbers, setNumbers}) {
+//
+//     const handleChange = (event, index) => {
+//         const newNumbers = [...numbers];
+//         newNumbers[index] = event.target.value;
+//         setNumbers(newNumbers);
+//     }
+//
+//     return (
+//         <Form.Group controlId="formGroupNumber">
+//             <Form.Label>Enter 4 unique digits:</Form.Label>
+//             <div style={{display: 'flex'}}>
+//                 <Form.Control type="number" min={0} max={9} value={numbers[0]} onChange={(event) => handleChange(event, 0)} style={{marginRight: '5px'}}/>
+//                 <Form.Control type="number" min={0} max={9} value={numbers[1]} onChange={(event) => handleChange(event, 1)} style={{marginRight: '5px'}}/>
+//                 <Form.Control type="number" min={0} max={9} value={numbers[2]} onChange={(event) => handleChange(event, 2)} style={{marginRight: '5px'}}/>
+//                 <Form.Control type="number" min={0} max={9} value={numbers[3]} onChange={(event) => handleChange(event, 3)} style={{marginRight: '5px'}}/>
+//             </div>
+//         </Form.Group>
+//     );
+// }
+//
+// export default NumberInput;

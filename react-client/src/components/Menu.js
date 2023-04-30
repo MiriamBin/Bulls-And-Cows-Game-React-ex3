@@ -1,25 +1,18 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 
-function Menu(){
-
-    const newGame = (event) => {
-        event.preventDefault();
-        console.log("new game");
-    }
-
-    const showRules = (event) => {
-        event.preventDefault();
+function Menu({ handleNewGame }) {
+    const showRules = () => {
         console.log("show Rules");
-    }
+    };
 
-    return(
+    return (
         <Container>
             <Row className="justify-content-center">
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick = {newGame}>New Game </Button>
+                    <Button style={{border: 'solid #5F5F83', borderWidth: '1px' ,color: '#5F5F83'}} variant="outline-secondary" onClick = {handleNewGame}>New Game </Button>
                 </Col>
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick = {showRules}>Game Rules </Button>
+                    <Button style={{border: 'solid #5F5F83', borderWidth: '1px' ,color: '#5F5F83'}} variant="outline-secondary" onClick = {showRules}>Game Rules </Button>
                 </Col>
             </Row>
         </Container>

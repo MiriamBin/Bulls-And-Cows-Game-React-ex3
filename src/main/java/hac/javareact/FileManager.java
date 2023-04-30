@@ -1,8 +1,7 @@
 package hac.javareact;
 import java.io.*;
 import java.util.*;
-import java.io.*;
-import java.util.*;
+
 
 public class FileManager {
     private static final String FILE_NAME = "scores.dat";
@@ -10,7 +9,7 @@ public class FileManager {
     //private final String filePath;
 
     private FileManager() {
-       // filePath = path;
+        // filePath = path;
     }
 
     public static FileManager getInstance() {
@@ -40,7 +39,7 @@ public class FileManager {
             while (!isEndOfFile) {
                 try {
                     UserScore userScore = (UserScore) ois.readObject();
-                    scoreList.add(userScore);
+                    scoreList.add(0, userScore);
                 }
                 catch (EOFException e) {
                     isEndOfFile = true; // EOFException as it is expected when the file is empty.
@@ -55,20 +54,19 @@ public class FileManager {
         }
         // Sort the scores in descending order
         Collections.sort(scoreList);
-        return scoreList;
+
+        return scoreList.subList(0, Math.min(scoreList.size(), 5));
     }
 
-    public synchronized void addScore(String name, int score) throws IOException, ClassNotFoundException {
+    public synchronized void addScore(UserScore newUserScore) throws IOException, ClassNotFoundException {
 
         List<UserScore> scoreList = getTopScores();
-        UserScore newUserScore =  new UserScore(name, score);
 
         int index = scoreList.indexOf(newUserScore);
         if(index != -1) {
             UserScore userScoreToUpdate = scoreList.get(index);
-            if (userScoreToUpdate.getScore() > score)
-                userScoreToUpdate.setScore(score);
-
+            if (userScoreToUpdate.getScore() > newUserScore.getScore())
+                userScoreToUpdate.setScore(newUserScore.getScore());
         } else {
             scoreList.add(newUserScore);
         }

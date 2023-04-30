@@ -7,5 +7,4 @@ function Messages(message){
         </Alert>
     )
 }
-
 export default Messages;

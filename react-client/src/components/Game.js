@@ -1,19 +1,25 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import Guess from "./Guess";
-import {useEffect} from "react";
 
-function Game({setScore, setGameOver}){
+function Game({ setScore, setGameOver, setNewGame, newGame }) {
     const [message, setMessage] = useState("");
     const [guess, setGuess] = useState(["", "", "", ""]);
-    const [bulls, setBulls] = useState(0);
-    const [cows, setCows] = useState(0);
-    const [target, setTarget] = useState([]);
+    const [lastGuessesArr, setLastGuessesArr] = useState([]);
+    const [target, setTarget] = useState(generateRandomNumbers());
 
     useEffect(() => {
-        // This function will only run once, at the beginning of the program
-        setTarget(generateRandomNumbers());
-    }, []);
+        if (newGame) {
+            setGuess(["", "", "", ""]);
+            setLastGuessesArr([]);
+            setTarget(generateRandomNumbers());
+            console.log(target)
+            setNewGame(false);
+            setGameOver(false);
+            setScore(0);
+        }
+    }, [newGame, setNewGame, setGameOver, setScore, target, setTarget ]);
 
+    //console.log(target) //TODO: change place.
     function generateRandomNumbers() {
         const arr = [];
         while (arr.length < 4) {
@@ -22,26 +28,24 @@ function Game({setScore, setGameOver}){
                 arr.push(randomNum);
             }
         }
-        console.log(arr);
         return arr;
     }
 
-
-
-
     return (
-        <Guess numbers={guess}
-               setNumbers={setGuess}
-               message = {message}
-               setMessage = {setMessage}
-               target = {target}
-               cows = {cows}
-               setCows = {setCows}
-               bulls = {bulls}
-               setBulls = {setBulls}
-               setGameOver = {setGameOver}
-               setScore = {setScore}
-        />
+        <>
+            <Guess
+                guess={guess}
+                setGuess={setGuess}
+                message={message}
+                setMessage={setMessage}
+                lastGuessesArr={lastGuessesArr}
+                setLastGuessesArr={setLastGuessesArr}
+                target={target}
+                setGameOver={setGameOver}
+                setScore={setScore}
+            />
+        </>
     );
 }
+
 export default Game;
