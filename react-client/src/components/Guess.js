@@ -1,19 +1,18 @@
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import NumberInput from "./NumberInput";
 import Messages from "./Messages";
-import GuessTable from "./GuessTable";
 
 /**
- * This component holds the guess form and the table of guesses.
+ * This component holds the guess form and messages to the user.
  * @param props
  * @returns {JSX.Element} - the guess form and the table of guesses
  * @constructor
  */
 function Guess(props){
-
+    const NUM_OF_DIGITS = 4; // the number of digits in the guess
     /**
      * This function handles the submit of the guess form.
-     * @param e
+     * @param e - the event
      */
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +24,7 @@ function Guess(props){
 
     /**
      * This function checks if the user entered 4 different digits.
-     * @returns {boolean}
+     * @returns {boolean} - true if the user entered 4 different digits, false otherwise
      */
     const checkUniqueNumbers = () => {
         if (props.numbers.length !== new Set(props.numbers).size) {
@@ -37,7 +36,7 @@ function Guess(props){
 
     /**
      * This function checks if the user entered 4 digits.
-     * @returns {boolean}
+     * @returns {boolean} - true if the user entered 4 digits, false otherwise
      */
     const checkInput = () => {
         if (props.numbers.some(num => num === "")) {
@@ -52,8 +51,8 @@ function Guess(props){
 
     /**
      * This function counts the number of bulls and cows in the user's guess.
-     * @param targetArr
-     * @param guessArr
+     * @param targetArr - the target array
+     * @param guessArr - the user's current guess array
      */
     const countBullsCows = (targetArr, guessArr) => {
         let bulls = 0;
@@ -66,7 +65,7 @@ function Guess(props){
                 cows++;
             }
         }
-        if (bulls === 4) {
+        if (bulls === NUM_OF_DIGITS) {
             props.setGameOver(true);
             props.setScore(props.guessesArr.length + 1);
             return
@@ -77,7 +76,7 @@ function Guess(props){
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <Container>
                 <Row className="m-3">
                     <Col>
@@ -99,11 +98,9 @@ function Guess(props){
                     </Col>
                 </Row>
                 <Messages message = {props.message} />
-                <GuessTable guessesArr = {props.guessesArr}/>
             </Container>
-        </form>
+        </Form>
     );
-
 }
 
 export default Guess;

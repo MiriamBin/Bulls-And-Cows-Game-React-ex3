@@ -1,5 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
 
+/**
+ * This component is the game rules modal.
+ * @param props - the props of the component
+ * @returns {JSX.Element} - the game rules modal
+ * @constructor - the game rules modal
+ */
 function GameRule(props) {
     return (
         <Modal

@@ -31,13 +31,18 @@ public class FileManager {
     }
 
     /**
-     * Reads the top 5 scores from the file.
+     * Reads the top 5 scores from the file. If the file does not exist, return an empty list
      * @param path The path of the file
      * @return The top 5 scores
      */
     public synchronized List<UserScore> getTopScores(String path) {
 
         List<UserScore> scoreList = new ArrayList<>();
+        File file = new File(path);
+        // If the file does not exist, return an empty list
+        if (!file.exists()) {
+            return scoreList;
+        }
 
         try (FileInputStream fis = new FileInputStream(path);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -62,7 +67,8 @@ public class FileManager {
         // Sort the scores in descending order
         Collections.sort(scoreList);
 
-        return scoreList.subList(0, Math.min(scoreList.size(), 5));
+        int SCORE_LIST_SIZE = 5;
+        return scoreList.subList(0, Math.min(scoreList.size(), SCORE_LIST_SIZE));
     }
 
     /**

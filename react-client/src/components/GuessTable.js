@@ -2,14 +2,11 @@ import {Table} from "react-bootstrap";
 
 /**
  * This component is the table of the guesses.
- * @param guess
- * @returns {JSX.Element}
- * @constructor
+ * @param guess - the guess object that holds the guesses array of the bulls and cows of each guess
+ * @returns {JSX.Element} - the table of the guesses
  */
 function GuessTable(guess) {
    let tableRows = [];
-    //const [tableRows, settableRows] = useState([]); // TODO:
-
     /**
      * This function creates a row in the table.
      * @param guess
@@ -23,6 +20,9 @@ function GuessTable(guess) {
             <td>{guess.cows}</td>
         </tr>);
     }
+    /**
+     * This function creates a row in the table for each guess.
+     */
     guess.guessesArr.forEach(createRow);
 
     return (

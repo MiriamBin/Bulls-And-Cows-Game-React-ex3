@@ -8,11 +8,10 @@ import {Table} from "react-bootstrap";
  */
 function HighScoreTable(scoreData){
     let tableRows = [];
-
     /**
      * This function creates a row in the table.
-     * @param score
-     * @param index
+     * @param score - the score object that holds the name and score of each score
+     * @param index - the index of the score
      */
     const createRow = (score, index) => {
         tableRows.push(
@@ -23,6 +22,8 @@ function HighScoreTable(scoreData){
             </tr >
         );
     }
+
+    /** This function creates a row in the table for each score. */
     scoreData.scores.forEach(createRow);
 
     return(
@@ -38,5 +39,4 @@ function HighScoreTable(scoreData){
         </Table>
     );
 }
-
 export default HighScoreTable;

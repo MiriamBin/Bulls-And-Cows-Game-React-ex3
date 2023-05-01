@@ -1,11 +1,26 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/YDg-_nm7)
 ## Authors
-* Name:  Email:
-* Name:  Email:
+* Name: Miriam Binyamines  Email: miriamman@edu.hac.ac.il
+* Name: Salomon Demma  Email: dennasa@edu.hac.ac.il
 
 ## Explanations
+* we implemented the game bulls and cows, which is a game where the player has to guess a 4 digit number, 
+* and the computer tells him how many digits are correct, and how many are in the correct position.
 
-(Explain here your project)
+* the project is divided into 3 parts:
+* the server side, which is a java web application, with a servlet that implements the REST API
+* the client side, which is a react application
+* the database, which is a file
+* the database is initialized with a table named highscores, which contains the highscores of the game
+
+* we used serialization to save and read the highscores to and form the file.
+
+* if file does not exist, it will be created.
+
+* important notes:
+* We have limited user input. The user cannot enter the same number more than once - in order to add interest to the game.
+* the username cannot contain special character or numbers, only letters.
+
 
 ## How to use this template
 This is the template for a project where front-end and back-end are separated.

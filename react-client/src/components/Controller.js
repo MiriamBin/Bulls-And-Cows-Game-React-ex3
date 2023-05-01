@@ -11,24 +11,26 @@ import GameRule from "./GameRule";
  * @returns {JSX.Element} - the controller of the game
  * @constructor - the controller of the game
  */
-
 function Controller() {
+    const TARGET_LENGTH = 4;                                     // the length of the target number
+    const [gameOver, setGameOver] = useState(false);    // state to check if the game is over
+    const [score, setScore] = useState(0);              // state to hold the score of the user
+    const [target, setTarget] = useState([]);           // state to hold the target numbers
+    const [guessesArr, setGuessesArr] = useState([]);   // state to hold the guesses of the user
+    const [showRules, setShowRules] = useState(false);  // state to check if the game rules should be shown
 
-    const [gameOver, setGameOver] = useState(false); // state to check if the game is over
-    const [score, setScore] = useState(0);           // state to hold the score of the user
-    const [target, setTarget] = useState([]);        // state to hold the target numbers
-    const [guessesArr, setGuessesArr] = useState([]);
-    const [showRules, setShowRules] = useState(false);
-
+    /** This function generates 4 random numbers, each number is different from the others.
+     * @returns {*[]}  - an array of 4 random numbers
+     */
     const generateRandomNumbers = () => {
         const arr = [];
-        while (arr.length < 4) {
+        while (arr.length < TARGET_LENGTH) {
             const randomNum = Math.floor(Math.random() * 10).toString();
             if (!arr.includes(randomNum)) {
                 arr.push(randomNum);
             }
         }
-        console.log(arr);
+        console.log(arr); // For grader - to see the target number
         return arr;
     }
 
@@ -53,5 +55,4 @@ function Controller() {
         </Card>
     );
 }
-
 export default Controller;

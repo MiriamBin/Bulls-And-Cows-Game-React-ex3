@@ -17,7 +17,7 @@ import static java.lang.System.out;
 public class ApiServlet extends HttpServlet {
     private final FileManager fileManager = FileManager.getInstance();
     private String FILE_PATH;
-    private static final String FILE_NAME = "scores.dat";
+    private static final String SCORES = "scores.dat";
 
 
     /**
@@ -30,6 +30,7 @@ public class ApiServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setHeader("Access-Control-Allow-Origin", "*");
         //String path = getServletContext().getRealPath(".");
+
         try {
             List<UserScore> topScores = fileManager.getTopScores(FILE_PATH);
             // Limit the list to the top 5 scores
@@ -108,7 +109,8 @@ public class ApiServlet extends HttpServlet {
     @Override
     public void init() {
         String PATH = getServletContext().getRealPath(".");
-        FILE_PATH = PATH + File.separator + FILE_NAME;
+        FILE_PATH = PATH + File.separator + SCORES;
+        System.out.println(FILE_PATH);
     }
 
     @Override
