@@ -50,7 +50,6 @@ public class ApiServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         String path = getServletContext().getRealPath(".");
         response.setCharacterEncoding("UTF-8");
@@ -58,8 +57,6 @@ public class ApiServlet extends HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
-//          String name = request.getParameter("name"); //TODO: don't need this
-//          int score = Integer.parseInt(request.getParameter("score"));  //TODO: don't need this
             BufferedReader reader = request.getReader();
             UserScore newUserScore = new Gson().fromJson(reader, UserScore.class);
 
@@ -68,12 +65,19 @@ public class ApiServlet extends HttpServlet {
             doGet(request, response);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "69");
+            System.out.println(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             String json = new Gson().toJson(e.getMessage());
             response.getWriter().write(json);
         }
     }
+
+    /**
+     * Validates the request
+     * @param name The name of the user
+     * @param score The score of the user
+     * @throws IOException
+     */
     private void validateRequest(String name, int score) throws IOException {
         if(!validateName(name) || !validateScore(score)) {
             throw new IOException("Invalid name or score");
@@ -89,7 +93,7 @@ public class ApiServlet extends HttpServlet {
             return false;
         }
         double value = ((Number) score).doubleValue();
-            // score is not a positive integer or is larger than MAX_INT
+        // score is not a positive integer or is larger than MAX_INT
         return !(value <= 0) && !(value > Integer.MAX_VALUE) && value == Math.floor(value);
     }
 
