@@ -67,6 +67,7 @@ function WinPage({score}) {
         setErrorMessage("");
         event.preventDefault();
         const name = event.target.elements.name.value.trim();
+        console.log(name);
 
         if (validateName(name)) {
             let params = {
@@ -80,7 +81,7 @@ function WinPage({score}) {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'datatype': 'json'
                 },
-                body: JSON.stringify(params)
+                body: new URLSearchParams(params).toString()
             })
                 .then(handleResponse)
                 .then(handleJson)

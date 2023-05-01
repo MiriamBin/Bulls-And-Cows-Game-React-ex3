@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class FileManager {
-    private static final String FILE_NAME = "scores.dat";
+
     private static FileManager instance;
     //private final String filePath;
 
@@ -19,11 +19,11 @@ public class FileManager {
         return instance;
     }
 
-    public synchronized List<UserScore> getTopScores() {
+    public synchronized List<UserScore> getTopScores(String path) {
 
         List<UserScore> scoreList = new ArrayList<>();
 
-        try (FileInputStream fis = new FileInputStream(FILE_NAME);
+        try (FileInputStream fis = new FileInputStream(path);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             boolean isEndOfFile = false;
@@ -38,10 +38,10 @@ public class FileManager {
             }
         }
         catch (FileNotFoundException ex) {
-            System.out.println("No such file " + FILE_NAME);
+            System.out.println("No such file" );
         }
         catch (IOException | ClassNotFoundException ex) {
-            System.out.println("Error reading file " + FILE_NAME);
+            System.out.println("Error reading file");
         }
         // Sort the scores in descending order
         Collections.sort(scoreList);
@@ -49,10 +49,11 @@ public class FileManager {
         return scoreList.subList(0, Math.min(scoreList.size(), 5));
     }
 
-    public synchronized void addScore(UserScore newUserScore) {
+    public synchronized void addScore(String name, int score, String path) {
 
-        List<UserScore> scoreList = getTopScores();
+        List<UserScore> scoreList = getTopScores(path);
 
+        UserScore newUserScore =  new UserScore(score,name);
         int index = scoreList.indexOf(newUserScore);
         if(index != -1) {
             UserScore userScoreToUpdate = scoreList.get(index);
@@ -62,7 +63,7 @@ public class FileManager {
             scoreList.add(newUserScore);
         }
 
-        try (FileOutputStream fos = new FileOutputStream(FILE_NAME);
+        try (FileOutputStream fos = new FileOutputStream(path);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             for (UserScore userScore : scoreList) {
                 oos.writeObject(userScore);
@@ -71,13 +72,13 @@ public class FileManager {
             oos.close();
         }
         catch (FileNotFoundException ex) {
-            System.out.println("No such file " + FILE_NAME);
+            System.out.println("No such file");
         }
         catch (EOFException e) {
             // Ignore EOFException as it is expected when the file is empty.
         }
         catch (IOException e) {
-            System.out.println("Error write to file " + FILE_NAME);
+            System.out.println("Error write to file" );
         }
     }
 }

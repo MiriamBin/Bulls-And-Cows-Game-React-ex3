@@ -12,6 +12,10 @@ import static java.lang.System.out;
 @WebServlet(name = "ServletApi", value = "/api/highscores")
 public class ApiServlet extends HttpServlet {
     private final FileManager fileManager = FileManager.getInstance();
+    private String PATH;
+    private String FILE_PATH;
+    private static final String FILE_NAME = "scores.dat";
+
 
     /**
      * @param request The request from the client
@@ -24,7 +28,7 @@ public class ApiServlet extends HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         //String path = getServletContext().getRealPath(".");
         try {
-            List<UserScore> topScores = fileManager.getTopScores();
+            List<UserScore> topScores = fileManager.getTopScores(FILE_PATH);
             // Limit the list to the top 5 scores
             List<UserScore> top5Scores = topScores.subList(0, Math.min(topScores.size(), 5));
             // Serialize the top 5 scores to JSON using Gson
@@ -51,21 +55,23 @@ public class ApiServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
-        String path = getServletContext().getRealPath(".");
         response.setCharacterEncoding("UTF-8");
-        //out.println(path);
+        System.out.println(PATH);
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
-            BufferedReader reader = request.getReader();
-            UserScore newUserScore = new Gson().fromJson(reader, UserScore.class);
+            String name = request.getParameter("name");
+            String scoreStr = request.getParameter("score");
+            int score = Integer.parseInt(scoreStr);
 
-            validateRequest(newUserScore.getName(), newUserScore.getScore());
-            fileManager.addScore(newUserScore);
+            validateRequest(name, score);
+
+            fileManager.addScore(name, score, FILE_PATH);
+
             doGet(request, response);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "69");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             String json = new Gson().toJson(e.getMessage());
             response.getWriter().write(json);
@@ -99,6 +105,8 @@ public class ApiServlet extends HttpServlet {
 
     @Override
     public void init() {
+        PATH = getServletContext().getRealPath(".");
+        FILE_PATH = PATH + File.separator + FILE_NAME;
     }
 
     @Override
