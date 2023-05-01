@@ -1,60 +1,79 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
-import React, {useState} from "react";
 import NumberInput from "./NumberInput";
 import Messages from "./Messages";
 import GuessTable from "./GuessTable";
 
-function Guess(guess){
+/**
+ * This component holds the guess form and the table of guesses.
+ * @param props
+ * @returns {JSX.Element} - the guess form and the table of guesses
+ * @constructor
+ */
+function Guess(props){
 
-    const [guessesArr, setGuessesArr] = useState([]);
-
+    /**
+     * This function handles the submit of the guess form.
+     * @param e
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!checkInput() || !checkUniqueNumbers()) {
             return;
         }
-        countBullsCows(guess.target, guess.numbers);
+        countBullsCows(props.target, props.numbers);
     }
 
+    /**
+     * This function checks if the user entered 4 different digits.
+     * @returns {boolean}
+     */
     const checkUniqueNumbers = () => {
-        if (guess.numbers.length !== new Set(guess.numbers).size) {
-            guess.setMessage("Please enter 4 different digits");
+        if (props.numbers.length !== new Set(props.numbers).size) {
+            props.setMessage("Please enter 4 different digits");
             return false;
         }
         return true;
     }
 
+    /**
+     * This function checks if the user entered 4 digits.
+     * @returns {boolean}
+     */
     const checkInput = () => {
-        if (guess.numbers.some(num => num === "")) {
-            guess.setMessage("Please enter 4 numbers");
+        if (props.numbers.some(num => num === "")) {
+            props.setMessage("Please enter 4 numbers");
             return false;
         }
         else{
-            guess.setMessage("");
+            props.setMessage("");
             return true;
         }
     }
 
+    /**
+     * This function counts the number of bulls and cows in the user's guess.
+     * @param targetArr
+     * @param guessArr
+     */
     const countBullsCows = (targetArr, guessArr) => {
         let bulls = 0;
         let cows = 0;
 
         for (let i = 0; i < targetArr.length; i++) {
             if (targetArr[i] === guessArr[i]) {
-                guess.setBulls(bulls++);
+                bulls++;
             } else if (targetArr.includes(guessArr[i])) {
-                guess.setCows(cows++);
+                cows++;
             }
         }
-
-        if (bulls === 4) {  // if all 4 numbers are correct
-            guess.setGameOver(true);
-            guess.setScore(guessesArr.length + 1);
+        if (bulls === 4) {
+            props.setGameOver(true);
+            props.setScore(props.guessesArr.length + 1);
             return
         }
 
-        guess.setMessage(`Your guess: ${bulls} bulls and ${cows} cows`);
-        setGuessesArr( [...guessesArr, {guess: guess.numbers, bulls: bulls, cows: cows}]);
+        props.setMessage(`Your guess: ${bulls} bulls and ${cows} cows`);
+        props.setGuessesArr( [...props.guessesArr, {guess: props.numbers, bulls: bulls, cows: cows}]);
     }
 
     return (
@@ -62,25 +81,25 @@ function Guess(guess){
             <Container>
                 <Row className="m-3">
                     <Col>
-                        <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {0}/>
+                        <NumberInput numbers={props.numbers} setNumbers={props.setNumbers} index = {0}/>
                     </Col>
                     <Col>
-                        <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {1}/>
+                        <NumberInput numbers={props.numbers} setNumbers={props.setNumbers} index = {1}/>
                     </Col>
                     <Col>
-                        <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {2}/>
+                        <NumberInput numbers={props.numbers} setNumbers={props.setNumbers} index = {2}/>
                     </Col>
                     <Col>
-                        <NumberInput numbers={guess.numbers} setNumbers={guess.setNumbers} index = {3}/>
+                        <NumberInput numbers={props.numbers} setNumbers={props.setNumbers} index = {3}/>
                     </Col>
                 </Row>
                 <Row className="justify-content-center m-3">
-                    <Col>
-                        <Button type="submit">MOO!</Button>
+                    <Col className="text-center">
+                        <Button style={{border: 'solid #7DB2FF', borderWidth: '1px' ,color: '#7DB2FF'}} variant="outline-primary" type="submit">MOO! </Button>
                     </Col>
                 </Row>
-                <Messages message = {guess.message} />
-                <GuessTable guessesArr = {guessesArr}/>
+                <Messages message = {props.message} />
+                <GuessTable guessesArr = {props.guessesArr}/>
             </Container>
         </form>
     );

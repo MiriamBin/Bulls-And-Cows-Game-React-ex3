@@ -1,6 +1,17 @@
 import { Form } from 'react-bootstrap';
 
+/**
+ * This component is the number input of the game.
+ * @param input
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function NumberInput(input) {
+    /**
+     * This function handles the change of the input. It updates the numbers array.
+     * @param index
+     * @param e
+     */
     const handleChange = (index, e) => {
         const newNumbers = [...input.numbers];
         newNumbers[index] = e.target.value;
@@ -10,9 +21,10 @@ function NumberInput(input) {
     return (
             <Form.Select
                 value={input[0]}
+
                 onChange={(e) => handleChange(input.index, e)}
                 className="form-control"
-                style={{border: 'solid #BDD452'}}>
+                style={{border: 'solid #BDD452', borderWidth: '1px'}}>
                 <option value="">Guess...</option>
                 <option value="0">0</option>
                 <option value="1">1</option>

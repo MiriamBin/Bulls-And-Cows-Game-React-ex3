@@ -1,8 +1,19 @@
 import {Table} from "react-bootstrap";
 
+/**
+ * This component is the table of the high scores.
+ * @param scoreData - the data of the high scores
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function HighScoreTable(scoreData){
     let tableRows = [];
 
+    /**
+     * This function creates a row in the table.
+     * @param score
+     * @param index
+     */
     const createRow = (score, index) => {
         tableRows.push(
             <tr className="text-center" key={tableRows.length}>

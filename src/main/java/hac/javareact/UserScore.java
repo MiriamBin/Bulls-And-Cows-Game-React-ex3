@@ -5,7 +5,7 @@ class UserScore implements Serializable, Comparable<UserScore>{
     private final String name;
     private int score;
 
-    public UserScore(String name, int score) {
+    public UserScore(int score, String name) {
         this.name = name;
         this.score = score;
     }

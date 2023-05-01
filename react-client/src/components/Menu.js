@@ -1,12 +1,27 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 
-function Menu(){
+/**
+ * This component is the menu of the game. It holds the buttons of the menu. new game and game rules.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function Menu(props){
 
+    /**
+     * This function starts a new game.
+     * @param event
+     */
     const newGame = (event) => {
         event.preventDefault();
-        console.log("new game");
+        props.setGameOver(false);
+        props.setTarget(props.generateRandomNumbers());
+        props.setGuessesArr([]);
     }
 
+    /**
+     * This function shows the game rules.
+     * @param event
+     */
     const showRules = (event) => {
         event.preventDefault();
         console.log("show Rules");
@@ -16,10 +31,10 @@ function Menu(){
         <Container>
             <Row className="justify-content-center">
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick = {newGame}>New Game </Button>
+                    <Button style={{border: 'solid #5F5F83', borderWidth: '1px' ,color: '#5F5F83'}} variant="outline-secondary" onClick = {newGame}>New Game </Button>
                 </Col>
                 <Col md="auto">
-                    <Button variant="outline-primary" onClick = {showRules}>Game Rules </Button>
+                    <Button style={{border: 'solid #5F5F83', borderWidth: '1px' ,color: '#5F5F83'}} variant="outline-secondary" onClick = {showRules}>Game Rules </Button>
                 </Col>
             </Row>
         </Container>
