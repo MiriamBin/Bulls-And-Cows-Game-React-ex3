@@ -1,0 +1,22 @@
+{
+  "name": "ex3-react-java-ex3_salomon_demma_miriam_binyamines",
+  "version": "1.0.0",
+  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/YDg-_nm7)\r ## Authors\r * Name:  Email:\r * Name:  Email:",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solange-s-Courses/ex3-react-java-ex3_salomon_demma_miriam_binyamines.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Solange-s-Courses/ex3-react-java-ex3_salomon_demma_miriam_binyamines/issues"
+  },
+  "homepage": "https://github.com/Solange-s-Courses/ex3-react-java-ex3_salomon_demma_miriam_binyamines#readme"
+}
