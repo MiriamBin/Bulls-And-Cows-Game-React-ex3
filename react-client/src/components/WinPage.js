@@ -53,7 +53,6 @@ function WinPage({score}) {
         const regex = /^[A-Z a-z]+$/; // regex to match only letters (upper or lower case)
         if(!regex.test(userName)){
             setErrorMessage("Name must contain only letters");
-            console.log("error");
             return false;
         }
         return true;
@@ -67,7 +66,6 @@ function WinPage({score}) {
         setErrorMessage("");
         event.preventDefault();
         const name = event.target.elements.name.value.trim();
-        console.log(name);
 
         if (validateName(name)) {
             let params = {

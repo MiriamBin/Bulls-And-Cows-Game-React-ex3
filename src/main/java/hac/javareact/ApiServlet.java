@@ -8,11 +8,14 @@ import javax.servlet.annotation.*;
 
 import static java.lang.System.out;
 
+/**
+ * This API endpoint (an endpoint is a function exposed by an API) receives score and name - saves them to a file
+ * the server and returns the top 5 scores.
+ */
 
 @WebServlet(name = "ServletApi", value = "/api/highscores")
 public class ApiServlet extends HttpServlet {
     private final FileManager fileManager = FileManager.getInstance();
-    private String PATH;
     private String FILE_PATH;
     private static final String FILE_NAME = "scores.dat";
 
@@ -39,7 +42,7 @@ public class ApiServlet extends HttpServlet {
             response.getWriter().write(json);
 
         } catch (Exception e) {
-            out.println(e.getMessage() + "43");
+            out.println(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             String json = new Gson().toJson(e.getMessage());
             response.getWriter().write(json);
@@ -48,15 +51,14 @@ public class ApiServlet extends HttpServlet {
 
     /**
      *
-     * @param request The request from the client
-     * @param response The response to the client
+     * @param request The request from the client - contains the name and score of the user
+     * @param response The response to the client - contains the top 5 scores
      * @throws IOException If an input or output exception occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        System.out.println(PATH);
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         try {
@@ -71,7 +73,7 @@ public class ApiServlet extends HttpServlet {
             doGet(request, response);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "69");
+            System.out.println(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             String json = new Gson().toJson(e.getMessage());
             response.getWriter().write(json);
@@ -80,9 +82,9 @@ public class ApiServlet extends HttpServlet {
 
     /**
      * Validates the request
-     * @param name The name of the user
-     * @param score The score of the user
-     * @throws IOException
+     * @param name The name of the user - must contain only letters
+     * @param score The score of the user - must be a positive integer
+     * @throws IOException If an input or output exception occurs
      */
     private void validateRequest(String name, int score) throws IOException {
         if(!validateName(name) || !validateScore(score)) {
@@ -105,7 +107,7 @@ public class ApiServlet extends HttpServlet {
 
     @Override
     public void init() {
-        PATH = getServletContext().getRealPath(".");
+        String PATH = getServletContext().getRealPath(".");
         FILE_PATH = PATH + File.separator + FILE_NAME;
     }
 
