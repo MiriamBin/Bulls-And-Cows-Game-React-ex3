@@ -1,0 +1,98 @@
+[33mcommit b681930768f5910bf8f9ee544ca7cca3bc0e62b6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: SalomonDemma <dennasa@edu.hac.ac.il>
+Date:   Sun Apr 30 21:37:12 2023 +0300
+
+    added new game btn
+
+[33mcommit caaaac4ca406287bc8740458339963e27d56d963[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 29 23:34:25 2023 +0300
+
+    added useEffect to Game
+
+[33mcommit 41a76909603cd90636a32c014d985ede882dc129[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 29 22:00:38 2023 +0300
+
+    added score table
+
+[33mcommit 1d67bcbdbfa1cc82d3de1773e9a5db2e475017f4[m
+Author: SalomonDemma <dennasa@edu.hac.ac.il>
+Date:   Sat Apr 29 20:03:29 2023 +0300
+
+    adding new score server side fixed
+
+[33mcommit 6b9ed4f4c2f2916d2585350113cc4677d8465612[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 29 19:59:55 2023 +0300
+
+    added error messages to WIN PAGE
+
+[33mcommit ccbcb2edc3eeba67fa0ae113350c792e16dcd332[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 29 17:37:28 2023 +0300
+
+    menu
+
+[33mcommit b79aefb91f20c4b3aa44b1fa3af2e0c7af52cada[m
+Author: SalomonDemma <dennasa@edu.hac.ac.il>
+Date:   Fri Apr 28 20:03:46 2023 +0300
+
+    read and write (FileManager) working
+    need to change the location of the file and fix the adding
+
+[33mcommit b5534f08a4d647b94b487dabefc114b7e908a5fa[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Fri Apr 28 17:00:50 2023 +0300
+
+    doPost function complete
+    need to resolve FileManager functions
+
+[33mcommit 0653bd031acd8d22c1fce6f4ee28e8d40ac51fed[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Fri Apr 28 16:05:06 2023 +0300
+
+    try
+
+[33mcommit 7e9582cf393c91ebb9042d6d8f33851042892421[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Thu Apr 27 20:46:58 2023 +0300
+
+    added servlet
+
+[33mcommit 7fbd826b0b58e8410c6242a2efd182015b7a4fc2[m
+Author: SalomonDemma <dennasa@edu.hac.ac.il>
+Date:   Tue Apr 25 19:45:28 2023 +0300
+
+    Salomon:
+    Win message added :)
+
+[33mcommit a2c018f7bdf2791e19e872f9510a36239f3038bf[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Mon Apr 17 17:44:20 2023 +0300
+
+    guess page complete
+
+[33mcommit bbcb7f670e6bbf3353d6898c0c0dc6e8088913b8[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 15 20:01:35 2023 +0300
+
+    need to solve the exponential push to the table
+
+[33mcommit 487772b79b10a72b52df233e04a5f4855c91bb7a[m
+Author: Miriam Binyamines <89273650+MiriamBin@users.noreply.github.com>
+Date:   Sat Apr 15 18:15:05 2023 +0300
+
+    started the game page
+
+[33mcommit a8c24036cb622587cb97bfbc119dec54bb8b3337[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Tue Apr 11 13:33:22 2023 +0000
+
+    Add assignment deadline url
+
+[33mcommit d2bd5b54dc10f2f6d2924a793767c339a55c9371[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Tue Apr 11 13:33:20 2023 +0000
+
+    Initial commit
