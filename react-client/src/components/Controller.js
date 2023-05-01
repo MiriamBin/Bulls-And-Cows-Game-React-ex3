@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Game from "./Game";
 import Menu from "./Menu";
 import WinPage from "./WinPage";
+import GameRule from "./GameRule";
 
 /**
  * This component is the controller of the game. It holds the state of the game.
@@ -17,6 +18,7 @@ function Controller() {
     const [score, setScore] = useState(0);           // state to hold the score of the user
     const [target, setTarget] = useState([]);        // state to hold the target numbers
     const [guessesArr, setGuessesArr] = useState([]);
+    const [showRules, setShowRules] = useState(false);
 
     const generateRandomNumbers = () => {
         const arr = [];
@@ -39,12 +41,14 @@ function Controller() {
                         <Menu setGuessesArr={setGuessesArr}
                               setTarget={setTarget}
                               setGameOver={setGameOver}
-                              generateRandomNumbers = {generateRandomNumbers}/>
+                              generateRandomNumbers = {generateRandomNumbers}
+                              setShowRules={setShowRules}/>
                     </Row>
                     <Row>
                         {gameOver ? <WinPage score = {score}/> : <Game generateRandomNumbers = {generateRandomNumbers} guessesArr={guessesArr} setGuessesArr={setGuessesArr} setTarget={setTarget} target={target} setScore={setScore} setGameOver={setGameOver}/>}
                     </Row>
                 </Container>
+                <GameRule show={showRules} onHide={() => setShowRules(false)}/>
             </Card.Body>
         </Card>
     );

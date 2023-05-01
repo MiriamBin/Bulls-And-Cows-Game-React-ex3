@@ -24,7 +24,7 @@ function Menu(props){
      */
     const showRules = (event) => {
         event.preventDefault();
-        console.log("show Rules");
+        props.setShowRules(true);
     }
 
     return(
